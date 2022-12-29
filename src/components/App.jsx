@@ -35,7 +35,7 @@ export const App = () => {
       })
       .catch(error => setError(error.message))
       .finally(() => setIsLoading(false));
-  }, [query, page, error]);
+  }, [query, page]);
 
   const loadMore = () => {
     setPage(prevState => prevState + 1);
@@ -65,6 +65,7 @@ export const App = () => {
       ) : (
         <ImageGallery photos={photos} onImgClick={onImgClick} />
       )}
+      {error && <Message>Oops. Something went wrong. {error}</Message>}
       {showBtn && <Button loadMore={loadMore} />}
       {imgLargeUrl && <Modal largeImg={imgLargeUrl} onImgClick={onImgClick} />}
     </>

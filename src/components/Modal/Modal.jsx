@@ -4,16 +4,15 @@ import { Overlay, ModalStyle } from './Modal.styled';
 
 export const Modal = ({ onImgClick, largeImg }) => {
   useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.code === 'Escape') {
+        onImgClick('');
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
 
     return () => window.removeEventListener('keydown', handleKeyDown);
-  });
-
-  const handleKeyDown = e => {
-    if (e.code === 'Escape') {
-      onImgClick('');
-    }
-  };
+  }, [onImgClick]);
 
   const handleBackdrop = event => {
     if (event.currentTarget === event.target) {
